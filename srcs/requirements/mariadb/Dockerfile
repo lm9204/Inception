@@ -1,0 +1,12 @@
+FROM	debian:bullseye
+
+RUN		apt-get update \
+		&& apt-get install -y mariadb-server \
+			mariadb-client \
+		&& rm -rf /var/lib/apt/lists/*
+
+COPY	./tools/init.sql /docker-entrypoint-initdb.d/
+
+EXPOSE 3306
+
+CMD ["mysqld"]
