@@ -1,16 +1,21 @@
-version: '3.8'
+version: '3'
 
 services:
   mariadb:
     build: ./requirements/mariadb
     container_name: mariadb
     volumes:
-      - /home/yeondcho/data/mariadb:/var/lib/mysql
+      # - /home/yeondcho/data/mariadb:/var/lib/mysql
+      - /Users/yeondcho/data/mariadb:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_DATABASE=${WORDPRESS_DB_NAME}
+    ports:
+      - "3306:3306"
+    restart: always
+    # init: true
     networks:
       - wordpress_network
 
@@ -19,12 +24,16 @@ services:
     container_name: nginx
     ports:
       - "443:443"
-      - "80:80"
     volumes:
-      - /home/yeondcho/data/nginx:/var/www/html
+      # - /home/yeondcho/data/www:/var/www/html
+      - /Users/yeondcho/data/www:/var/www/html
     environment:
       - DOMAIN_NAME=${DOMAIN_NAME}
     restart: always
+    depends_on:
+      - wordpress
+      - mariadb
+    # init: true
     networks:
       - wordpress_network
 
@@ -32,12 +41,23 @@ services:
     build: ./requirements/wordpress
     container_name: wordpress
     volumes:
-      - /home/yeondcho/data/wordpress:/var/www/html
+      # - /home/yeondcho/data/www:/var/www/html
+      - /Users/yeondcho/data/www:/var/www/html
     environment:
       - WORDPRESS_DB_HOST=mariadb
       - WORDPRESS_DB_USER=${MYSQL_USER}
       - WORDPRESS_DB_PASSWORD=${MYSQL_PASSWORD}
       - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
+      - WORDPRESS_USER=${WORDPRESS_USER}
+      - WORDPRESS_USER_EMAIL=${WORDPRESS_USER_EMAIL}
+      - WORDPRESS_USER_PASSWORD=${WORDPRESS_USER_PASSWORD}
+    ports:
+      - "9000:9000"
+    depends_on:
+      - mariadb
+    # init: true
+    restart: always
+    tty: true
     networks:
       - wordpress_network
 
