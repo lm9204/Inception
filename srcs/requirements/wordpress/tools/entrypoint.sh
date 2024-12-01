@@ -15,7 +15,6 @@ then
 	cp wp-config-sample.php wp-config.php
 
 	# wp-cli settings
-
 	wp core install \
 	--allow-root \
 	--path="/var/www/html" \
@@ -24,18 +23,17 @@ then
 	--admin_user="nimda" \
 	--admin_password="1234" \
 	--admin_email="nimda@gmail.com" \
-	--debug
 
 	wp user create \
-		$WORDPRESS_USER $WORDPRESS_USER_EMAIL \
-		--user_pass=$WORDPRESS_USER_PASSWORD \
-		--role=author \
-		--allow-root \
-		--path=/var/www/html \
+	$WORDPRESS_USER $WORDPRESS_USER_EMAIL \
+	--user_pass=$WORDPRESS_USER_PASSWORD \
+	--role=author \
+	--allow-root \
+	--path=/var/www/html \
 
-	echo "done"
+	echo "워드프레스 설정 완료."
 else
-	echo "wp core already downloaded"
+	echo "워드프레스 설정되어 있음."
 fi
 
 exec "$@"

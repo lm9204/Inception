@@ -15,8 +15,9 @@ then
         GRANT ALL PRIVILEGES ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
 EOSQL
 
-	echo 'done'
-
+	echo 'MariaDB 설치됨.'
+else
+	echo 'MariaDB됨 설치되어 있음.'
 fi
 
 exec $@
