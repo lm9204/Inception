@@ -15,8 +15,6 @@ RUN mkdir -p /run/mysqld && \
 	chown -R mysql:mysql /var/lib/mysql && \
 	chmod -R 755 /var/lib/mysql
 
-
-RUN mysql_install_db --user=mysql --datadir=/var/lib/mysql
 ENTRYPOINT [ "/usr/local/bin/entrypoint.sh" ]
 
 EXPOSE 3306

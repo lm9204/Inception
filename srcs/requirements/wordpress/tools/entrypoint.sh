@@ -18,11 +18,11 @@ then
 	wp core install \
 	--allow-root \
 	--path="/var/www/html" \
-	--url="http://localhost"\
+	--url=$WORDPRESS_URL \
 	--title="inception" \
-	--admin_user="nimda" \
-	--admin_password="1234" \
-	--admin_email="nimda@gmail.com" \
+	--admin_user=$WORDPRESS_ADMIN_USER \
+	--admin_password=$WORDPRESS_ADMIN_PASSWORD \
+	--admin_email=$WORDPRESS_ADMIN_EMAIL \
 
 	wp user create \
 	$WORDPRESS_USER $WORDPRESS_USER_EMAIL \

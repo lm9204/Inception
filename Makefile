@@ -7,7 +7,11 @@ else ifeq ($(OS),Darwin)
 	DATA = /Users/yeondcho/data
 endif
 
-all:
+all: build
+
+build:
+	mkdir -p /Users/yeondcho/data/mariadb
+	mkdir -p /Users/yeondcho/data/www
 	$(DOCKER) up --build
 
 up:
@@ -22,6 +26,6 @@ clean: down
 fclean: clean
 	rm -rf $(DATA)/*
 
-re: clean all
+re: down up
 
 .PHONY: all up down re clean fclean

@@ -15,7 +15,6 @@ services:
     ports:
       - "3306:3306"
     restart: always
-    # init: true
     networks:
       - wordpress_network
 
@@ -33,7 +32,6 @@ services:
     depends_on:
       - wordpress
       - mariadb
-    # init: true
     networks:
       - wordpress_network
 
@@ -44,10 +42,14 @@ services:
     volumes:
       - wordpress_data:/var/www/html
     environment:
+      - WORDPRESS_URL=${DOMAIN_NAME}
       - WORDPRESS_DB_HOST=mariadb
       - WORDPRESS_DB_USER=${MYSQL_USER}
       - WORDPRESS_DB_PASSWORD=${MYSQL_PASSWORD}
       - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
+      - WORDPRESS_ADMIN_USER=${WORDPRESS_ADMIN_USER}
+      - WORDPRESS_ADMIN_PASSWORD=${WORDPRESS_ADMIN_PASSWORD}
+      - WORDPRESS_ADMIN_EMAIL=${WORDPRESS_ADMIN_EMAIL}
       - WORDPRESS_USER=${WORDPRESS_USER}
       - WORDPRESS_USER_EMAIL=${WORDPRESS_USER_EMAIL}
       - WORDPRESS_USER_PASSWORD=${WORDPRESS_USER_PASSWORD}
@@ -55,7 +57,6 @@ services:
       - "9000:9000"
     depends_on:
       - mariadb
-    # init: true
     restart: always
     tty: true
     networks:

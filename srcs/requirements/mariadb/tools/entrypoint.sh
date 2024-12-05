@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-if [ ! -e "/var/lib/mysql/mysql" ];
+if [ ! -e "/var/lib/mysql/wordpress" ];
 then
     echo 'MariaDB 데이터 디렉토리 초기화...'
     mysql_install_db --user=mysql --datadir=/var/lib/mysql
