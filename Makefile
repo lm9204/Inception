@@ -10,8 +10,8 @@ endif
 all: build
 
 build:
-	mkdir -p /Users/yeondcho/data/mariadb
-	mkdir -p /Users/yeondcho/data/www
+	mkdir -p $(DATA)/mariadb
+	mkdir -p $(DATA)/www
 	$(DOCKER) up --build
 
 up:
@@ -24,7 +24,7 @@ clean: down
 	docker system prune -af
 
 fclean: clean
-	rm -rf $(DATA)/*
+	sudo rm -rf $(DATA)/*
 
 re: down up
 

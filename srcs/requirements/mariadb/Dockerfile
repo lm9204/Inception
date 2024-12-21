@@ -19,4 +19,4 @@ ENTRYPOINT [ "/usr/local/bin/entrypoint.sh" ]
 
 EXPOSE 3306
 
-CMD ["mariadbd", "-u", "root"]
+CMD ["mariadbd", "-u", "mysql"]
